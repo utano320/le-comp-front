@@ -2,7 +2,7 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
-    "start": "pm2 start ./node_modules/nuxt/bin/nuxt-start --name=\"le-comp-front\""
+    "start": "pm2 start ./node_modules/nuxt/bin/nuxt.js --name=\"le-comp-front\""
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
