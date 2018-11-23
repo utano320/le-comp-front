@@ -11,21 +11,21 @@
           {{ user.name }}
         </option>
       </select>
-      <select class="test-component column" v-model="second">
-        <option value="0">--- 選択してください ---</option>
-        <option
-          v-for="user in users"
-          :value="user.id"
-          :key="user.id"
-        >
-          {{ user.name }}
-        </option>
-      </select>
-      <button @click="getRmse(first, second)">比較</button>
+      <button @click="getRmse(first)">比較</button>
     </div>
-    <div class="row">
-      <div class="column">比較結果：{{ rmse === -1 ? '-' : rmse }}</div>
-    </div>
+    <table>
+      <tr>
+        <th>対象</th>
+        <th>比較結果</th>
+      </tr>
+      <tr
+        v-for="(rmse, index) in rmseList"
+        :key="index"
+      >
+        <td>{{ rmseList[index][0] }}</td>
+        <td>{{ rmseList[index][1] }}</td>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -33,8 +33,7 @@
 export default {
   data() {
     return {
-      first: 0,
-      second: 0
+      first: 0
     };
   },
   props: {
@@ -46,10 +45,17 @@ export default {
       type: Function,
       default: null
     },
-    rmse: {
-      type: Number,
-      default: -1
+    rmseList: {
+      type: Array,
+      default: []
     }
   }
 };
 </script>
+
+<style scoped>
+table {
+  color: #666;
+  font-weight: bold;
+}
+</style>

@@ -5,7 +5,7 @@
     <test-component
       :users="users"
       :get-rmse="getRmse"
-      :rmse="rmse"
+      :rmseList="rmseList"
     />
   </div>
 </template>
@@ -24,7 +24,7 @@ export default {
     return {
       apiUrl: process.env.API_PROTOCOL + "://" + process.env.API_HOST,
       users: [],
-      rmse: -1
+      rmseList: []
     };
   },
   methods: {
@@ -34,17 +34,16 @@ export default {
         self.users = res.data;
       });
     },
-    getRmse(first, second) {
+    getRmse(first) {
       let self = this;
       axios
         .get(self.apiUrl + "/comp_rmse", {
           params: {
-            first: first,
-            second: second
+            first: first
           }
         })
         .then(res => {
-          self.rmse = res.data.rmse;
+          self.rmseList = res.data.rmseList;
         });
     }
   },
